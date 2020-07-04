@@ -3,3 +3,18 @@ Credit card consumption patterns are a gold mine for banks and financial compani
 Thus it is important to understand the relationship between the customer profile and their spending patterns. The Common Man Bank Ltd (CMB) wants to understand these patterns thoroughly and get insights on the customer persona and the spending patterns. So from their database, they have prepared the data of sample customers and their transaction history. As a data scientist working with CMB, you are now supposed to mine insights from the data.
 
 CMB Bank has given customer details, like age, gender and other demographics. Also shared are information on liabilities, assets and history of transactions with the bank for each customer. In addition to the above, data has been provided for a particular set of customers' credit card spend in the previous 3 months (April, May & June) and their expected average spend in the coming 3 months (July, August & September). Predict the average spend for a different set of customers in the test set for the coming 3 months.
+
+
+The average predicted spend of customers for the next three months would be evaluated using Root of Mean Squared Logarithmic Error i.e RMSLE.
+
+You can use the below function for calculating the RMSLE:
+
+def rmsle(actual_column, predicted_column):
+    sum=0.0
+    for x,y in zip(real_column,predicted_column):
+        if x<0 or y<0: #check for negative values. 
+            continue
+        p = np.log(y+1)
+        r = np.log(x+1)
+        sum = sum + (p - r)**2
+    return (sum/len(predicted_column))**0.5
